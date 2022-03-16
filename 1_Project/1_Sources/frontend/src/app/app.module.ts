@@ -1,6 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Modulo para trabajo con formularios.
+import { FormsModule} from '@angular/forms';
+// DataFormulario: Necesario para formularios por validación tipo Data.
+import { ReactiveFormsModule} from '@angular/forms';
+
+// Modulos PrimeNg
+import { MenuModule } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+//
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -19,8 +32,14 @@ import { MoviesEditComponent } from './components/movies/movies-edit/movies-edit
     MoviesEditComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,     
+    MenuModule,
+    RippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
