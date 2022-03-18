@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Servicios
+import { ServiceModule } from './features/service.module';
+
 // Modulos
 import { FeaturesModule } from './features/features.module';
 import { SharedModule } from './shared/shared.module';
@@ -19,7 +22,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    FeaturesModule
+    FeaturesModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
