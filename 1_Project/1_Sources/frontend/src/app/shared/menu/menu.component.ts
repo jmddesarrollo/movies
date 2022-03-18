@@ -23,8 +23,8 @@ export class MenuComponent implements OnInit {
       {
         items: [
           { label: 'Películas', icon: 'pi pi-fw pi-video', routerLink: ['/movies-list'] },
-          { label: 'Actores', icon: 'pi pi-fw pi-users'},
-          { label: 'Estudios', icon: 'pi pi-fw pi-home' }
+          { label: 'Actores', icon: 'pi pi-fw pi-users', routerLink: ['/actors-list']},
+          { label: 'Estudios', icon: 'pi pi-fw pi-home', routerLink: ['/studies-list'] }
         ],
       },
     ]; 
