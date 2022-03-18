@@ -23,10 +23,10 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();  
+    this.getAllMovies();      
   }
 
-  getAll() {
+  getAllMovies() {
     this.loading = true;
     this.moviesService.getAll().subscribe((response: any) => {
       console.log('Respuesta del subscribe');

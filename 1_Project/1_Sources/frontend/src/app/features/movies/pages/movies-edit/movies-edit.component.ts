@@ -39,6 +39,14 @@ export class MoviesEditComponent implements OnInit {
       console.log('Respuesta del edit');
       console.log(response);
     });    
+  } 
+  
+  deleteMovie(id: number) {
+    
+    this.moviesService.delete(id).subscribe((response: MovieModel) => {
+      console.log('Respuesta del delete');
+      console.log(response);
+    });    
   }  
 
 }

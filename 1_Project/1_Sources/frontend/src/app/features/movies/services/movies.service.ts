@@ -30,10 +30,14 @@ export class MoviesService {
     return this.httpClient.post(this.url, body, {'headers': this.headers} );
   }
 
-  edit(data: MovieModel): any {
-    const body=JSON.stringify(data);
+  edit(movieObj: MovieModel): any {
+    const body = JSON.stringify(movieObj);
 
-    return this.httpClient.put(this.url + '/' + data.id, body, {'headers': this.headers} );
+    return this.httpClient.put(this.url + '/' + movieObj.id, body, {'headers': this.headers} );
   }  
+
+  delete(id: number): any {
+    return this.httpClient.delete(this.url + '/' + id, {'headers': this.headers} );
+  }    
 
 }
