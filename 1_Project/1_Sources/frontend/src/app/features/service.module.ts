@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MoviesService } from './service.index';
+import { MoviesService, ActorsService } from './service.index';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import { MoviesService } from './service.index';
     HttpClientModule
   ],
   providers: [
-      MoviesService
+      MoviesService,
+      ActorsService
     ],
   declarations: []
 })

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* On screens that are 1367px or greater */
+
+@media screen and (min-width: 1367px) {
+    .app-overflow {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 80vh;
+    }
+}
+
+
+/* On screens that are 1367px or less */
+
+@media screen and (max-width: 1367px) {
+    .app-overflow {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 50vh;
+    }
+}

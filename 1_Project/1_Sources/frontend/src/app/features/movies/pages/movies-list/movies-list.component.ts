@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // Servicios
-import { MoviesService } from '../../../service.index';
+import { MoviesService, ActorsService } from '../../../service.index';
 import { TitleShareService } from '../../../../shared/title/services/title.service';
 
 // Modelos
 import { MovieModel } from '../../models/movie.model';
+import { ActorModel } from '../../../actors/models/actor.model';
 
 @Component({
   selector: 'app-movies-list',
@@ -14,25 +15,31 @@ import { MovieModel } from '../../models/movie.model';
 })
 export class MoviesListComponent implements OnInit, OnDestroy {
   public title: string;
-  public loading: boolean;
+  public loadingMovies: boolean;
+  public loadingActors: boolean;
   public moviesObj: MovieModel[];
+  public actorsObj: ActorModel[];
 
   private observables = new Array();
 
   constructor(
     private moviesService: MoviesService,
+    private actorsService: ActorsService,
     private titleShareService: TitleShareService
   ) {
     this.title = 'Películas';
-    this.loading = true;
+    this.loadingMovies = true;
+    this.loadingActors = true;
     this.moviesObj = [];
+    this.actorsObj = [];
     
     this.observables = [];
   }
 
   ngOnInit(): void {    
     this.setTitle();
-    this.getAllMovies();      
+    this.getAllMovies();   
+    this.getAllActors();   
   }
 
   ngOnDestroy() {
@@ -48,17 +55,25 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   }
 
   getAllMovies() {
-    this.loading = true;
+    this.loadingMovies = true;
     const ob = this.moviesService.getAll().subscribe((response: any) => {
-      console.log('Respuesta getAll');
-
       this.moviesObj = response;
 
-      console.log(this.moviesObj);
-      this.loading = false;
+      this.loadingMovies = false;
     });
 
     this.observables.push(ob);
   }
+
+  getAllActors() {
+    this.loadingActors = true;
+    const ob = this.actorsService.getAll().subscribe((response: any) => {
+      this.actorsObj = response;
+
+      this.loadingActors = false;
+    });
+
+    this.observables.push(ob);
+  }  
 
 }
