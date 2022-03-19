@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from "@angular/common";
+
 
 // Servicios
 import { ServiceModule } from './features/service.module';
@@ -20,10 +21,16 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     SharedModule,
     FeaturesModule,
     ServiceModule
+  ],
+  exports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,12 +1,5 @@
 import { NgModule } from '@angular/core';
-
-import { MoviesListComponent } from './movies/pages/movies-list/movies-list.component';
-import { MoviesAddComponent } from './movies/pages/movies-add//movies-add.component';
-import { MoviesEditComponent } from './movies/pages/movies-edit//movies-edit.component';
-
-// Componentes limpios creados solo para probar enlaces en el menú
-import { ActorsListComponent } from './actors/pages/actors-list/actors-list.component';
-import { StudiesListComponent } from './studies/pages/studies-list/studies-list.component';
+import { CommonModule } from "@angular/common";
 
 // Modulo para trabajo con formularios.
 import { FormsModule} from '@angular/forms';
@@ -15,20 +8,36 @@ import { ReactiveFormsModule} from '@angular/forms';
 
 // Modulos PrimeNg
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
+// Componentes limpios creados solo para probar enlaces en el menú
+import { ActorsListComponent } from './actors/pages/actors-list/actors-list.component';
+import { StudiesListComponent } from './studies/pages/studies-list/studies-list.component';
+
+// Componentes
+import { MoviesListComponent } from './movies/pages/movies-list/movies-list.component';
+import { MoviesAddComponent } from './movies/pages/movies-add//movies-add.component';
+import { MoviesEditComponent } from './movies/pages/movies-edit//movies-edit.component';
+import { MovieDetailComponent } from './movies/components/movie-detail/movie-detail.component';
 
 
 @NgModule({
   imports: [
-    ButtonModule,
     FormsModule,
     ReactiveFormsModule,    
+    CommonModule,
+    ButtonModule,
+    CardModule,
+    ProgressSpinnerModule
   ],
   declarations: [
     MoviesListComponent,
     MoviesAddComponent,
     MoviesEditComponent,
     ActorsListComponent,
-    StudiesListComponent
+    StudiesListComponent,
+    MovieDetailComponent
   ],
   exports: [
     MoviesListComponent,

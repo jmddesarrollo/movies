@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // Servicios
 import { MoviesService } from '../../../service.index';
@@ -11,8 +11,10 @@ import { MovieModel } from '../../models/movie.model';
   templateUrl: './movies-edit.component.html',
   styleUrls: ['./movies-edit.component.css']
 })
-export class MoviesEditComponent implements OnInit {
+export class MoviesEditComponent implements OnInit, OnDestroy {
   public movieObj: MovieModel;
+
+  private observables = new Array();
 
   constructor(
     private moviesService: MoviesService
@@ -27,26 +29,40 @@ export class MoviesEditComponent implements OnInit {
       "imdbRating": 9.27,
       "actors": [4, 5, 6]
     };
+
+    this.observables = [];
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+    for (const ob of this.observables) {
+      if (ob !== undefined && ob !== null) {
+        ob.unsubscribe();
+      }
+    }
+  }  
+
   editMovie() {
     const data = this.movieObj;
 
-    this.moviesService.edit(data).subscribe((response: MovieModel) => {
+    const ob = this.moviesService.edit(data).subscribe((response: MovieModel) => {
       console.log('Respuesta del edit');
       console.log(response);
-    });    
+    }); 
+    
+    this.observables.push(ob);
   } 
   
   deleteMovie(id: number) {
     
-    this.moviesService.delete(id).subscribe((response: MovieModel) => {
+    const ob = this.moviesService.delete(id).subscribe((response: MovieModel) => {
       console.log('Respuesta del delete');
       console.log(response);
-    });    
+    });   
+    
+    this.observables.push(ob);
   }  
 
 }

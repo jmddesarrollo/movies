@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// Servicios
+import { TitleShareService } from './title/services/title.service';
+
+// Componentes
 import { MenuComponent } from './menu/menu.component';
-import { TitleComponent } from './title/title.component';
+import { TitleComponent } from './title/components/title.component';
 
 // Modulos PrimeNg
 import { MenuModule } from 'primeng/menu';
@@ -25,6 +29,9 @@ import { RippleModule } from 'primeng/ripple';
   exports: [
     MenuComponent,
     TitleComponent
+  ],
+  providers: [
+    TitleShareService
   ]
 })
 export class SharedModule { }
