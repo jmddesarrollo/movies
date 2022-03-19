@@ -20,6 +20,7 @@ import { MoviesListComponent } from './movies/pages/movies-list/movies-list.comp
 import { MoviesAddComponent } from './movies/pages/movies-add//movies-add.component';
 import { MoviesEditComponent } from './movies/pages/movies-edit//movies-edit.component';
 import { MovieDetailComponent } from './movies/components/movie-detail/movie-detail.component';
+import { MovieManagerComponent } from './movies/pages/movie-manager/movie-manager.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MovieDetailComponent } from './movies/components/movie-detail/movie-det
     MoviesEditComponent,
     ActorsListComponent,
     StudiesListComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
+    MovieManagerComponent
   ],
   exports: [
     MoviesListComponent,

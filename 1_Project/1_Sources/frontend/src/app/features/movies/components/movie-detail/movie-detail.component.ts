@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Modelos
 import { MovieModel } from '../../models/movie.model';
@@ -15,7 +16,9 @@ export class MovieDetailComponent implements OnInit {
 
   public actorsMovie: ActorModel[];
 
-  constructor() { 
+  constructor(
+    private router: Router
+  ) { 
     this.movie = {
       id: 0,
       title: '',
@@ -42,6 +45,10 @@ export class MovieDetailComponent implements OnInit {
         this.actorsMovie.push(actor);
       }   
     }
+  }
+
+  managerMovie() {
+    this.router.navigate(["/movies-manager/" + this.movie.id]);
   }
 
 }

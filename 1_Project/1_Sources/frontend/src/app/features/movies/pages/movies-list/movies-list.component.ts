@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Servicios
 import { MoviesService, ActorsService } from '../../../service.index';
@@ -25,7 +26,8 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   constructor(
     private moviesService: MoviesService,
     private actorsService: ActorsService,
-    private titleShareService: TitleShareService
+    private titleShareService: TitleShareService,
+    private router: Router
   ) {
     this.title = 'Películas';
     this.loadingMovies = true;
@@ -75,5 +77,9 @@ export class MoviesListComponent implements OnInit, OnDestroy {
 
     this.observables.push(ob);
   }  
+
+  addMovie() {
+    this.router.navigate(['/movies-manager/0']);
+  }
 
 }

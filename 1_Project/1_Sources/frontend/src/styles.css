@@ -23,3 +23,15 @@
         max-width: 50vh;
     }
 }
+
+.p-card .p-card-content {
+    padding: 0rem 0 !important;
+}
+
+.p-card .p-card-body {
+    padding: 0.5rem !important;
+}
+
+.app-pointer {
+    cursor: pointer;
+}

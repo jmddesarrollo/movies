@@ -1,11 +1,13 @@
-<div *ngIf="!loadingMovies && !loadingActors">
+<div *ngIf="!loadingMovies && !loadingActors" id="app-movies-list">
     <div *ngFor="let movie of moviesObj" class="w3-margin-top">
         <app-movie-detail [movie]="movie" [actors]="actorsObj"></app-movie-detail>
     </div>
 </div>
 
 
-<div class="w3-container w3-center " *ngIf="loadingMovies || loadingActors">
+<div class="w3-center w3-margin-top" *ngIf="loadingMovies || loadingActors" id="app-movies-list-loading">
     <p-progressSpinner [style]="{width: '50px', height: '50px'} " styleClass="custom-spinner " strokeWidth="8 " fill="var(--surface-ground) " animationDuration=".5s "></p-progressSpinner>
     <div>Cargando películas...</div>
 </div>
+
+<span id="app-icon-plus" class="w3-center app-pointer" (click)="addMovie()"><i class="pi pi-plus-circle" style="font-size: 2rem" title="Añadir película"></i></span>
