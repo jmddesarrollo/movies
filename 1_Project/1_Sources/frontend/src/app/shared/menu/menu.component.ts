@@ -20,13 +20,10 @@ export class MenuComponent implements OnInit {
     this.title = 'A definir';
 
     this.items = [
-      {
-        items: [
-          { label: 'Películas', icon: 'pi pi-fw pi-video', routerLink: ['/movies-list'] },
-          { label: 'Actores', icon: 'pi pi-fw pi-users', routerLink: ['/actors-list']},
-          { label: 'Estudios', icon: 'pi pi-fw pi-home', routerLink: ['/studies-list'] }
-        ],
-      },
+      { label: 'Películas', icon: 'pi pi-fw pi-video', routerLink: ['/movies-list'] },
+      { label: 'Actores', icon: 'pi pi-fw pi-users', routerLink: ['/actors-list']},
+      { label: 'Estudios', icon: 'pi pi-fw pi-home', routerLink: ['/studies-list'] }
+
     ]; 
   }
 
