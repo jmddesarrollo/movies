@@ -6,9 +6,15 @@ import { FormsModule} from '@angular/forms';
 // DataFormulario: Necesario para formularios por validación tipo Data.
 import { ReactiveFormsModule} from '@angular/forms';
 
+// Servicios PrimeNg
+import { ConfirmationService, MessageService } from 'primeng/api';
 // Modulos PrimeNg
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 // Componentes limpios creados solo para probar enlaces en el menú
@@ -17,11 +23,8 @@ import { StudiesListComponent } from './studies/pages/studies-list/studies-list.
 
 // Componentes
 import { MoviesListComponent } from './movies/pages/movies-list/movies-list.component';
-import { MoviesAddComponent } from './movies/pages/movies-add//movies-add.component';
-import { MoviesEditComponent } from './movies/pages/movies-edit//movies-edit.component';
 import { MovieDetailComponent } from './movies/components/movie-detail/movie-detail.component';
 import { MovieManagerComponent } from './movies/pages/movie-manager/movie-manager.component';
-
 
 @NgModule({
   imports: [
@@ -30,21 +33,24 @@ import { MovieManagerComponent } from './movies/pages/movie-manager/movie-manage
     CommonModule,
     ButtonModule,
     CardModule,
+    ConfirmPopupModule,
+    InputNumberModule,
+    InputTextModule,
+    MultiSelectModule,
     ProgressSpinnerModule
   ],
   declarations: [
     MoviesListComponent,
-    MoviesAddComponent,
-    MoviesEditComponent,
     ActorsListComponent,
     StudiesListComponent,
     MovieDetailComponent,
     MovieManagerComponent
   ],
   exports: [
-    MoviesListComponent,
-    MoviesAddComponent,
-    MoviesEditComponent
+  ],
+  providers: [
+    ConfirmationService,
+    MessageService
   ]
 })
 export class FeaturesModule { }

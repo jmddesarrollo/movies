@@ -22,7 +22,11 @@ export class MoviesService {
 
   getAll() {
     return this.httpClient.get(this.url, { headers: this.headers });
-  }    
+  }  
+  
+  get(id: number): any {
+    return this.httpClient.get(this.url + '/' + id, {'headers': this.headers} );
+  }
 
   add(data: MovieModel): any {
     const body=JSON.stringify(data);

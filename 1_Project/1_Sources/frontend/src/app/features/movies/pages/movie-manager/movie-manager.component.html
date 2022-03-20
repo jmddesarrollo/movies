@@ -1,1 +1,67 @@
-<p>movie-manager works!</p>
+<div class="w3-center w3-margin-top" *ngIf="loading" id="mov-loading">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'} " styleClass="custom-spinner " strokeWidth="8 " fill="var(--surface-ground) " animationDuration=".5s "></p-progressSpinner>
+    <div>Cargando película...</div>
+</div>
+
+<form class="w3-container w3-panel" [formGroup]="forma" (ngSubmit)="saveData()" id="mov-form" *ngIf="!loading">
+    <div class="field">
+        <label for="mov-title">Título</label><br>
+        <input pInputText type="text" formControlName="title" autofocus maxlength="100" id="mov-title" />
+
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'].touched && forma.controls['title'].errors?.['required']" id="mov-title-req">El título es requerido<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'] && forma.controls['title'].errors?.['pattern'] && !forma.controls['title'].errors?.['required']" id="mov-title-alert-title-format">El título está con formato inválido.<br> Solo se permiten letras (a-z, A-Z), cedilla (ç, Ç), et (&), apóstrofe ('), punto (.), coma (,), dos puntos (:), guión medio (-), guión bajo (_), interrogantes (¿?), paréntesis (()), barra invertida (/), vocales acentuadas y con diéresis (áéíóúäëïöü).<br>Máximo 100 caracteres.<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'] && forma.controls['title'].errors?.['maxtext'] && !forma.controls['title'].errors?.['required']" id="mov-title-alert-max">El título supera los caracteres máximos permitidos (100)<br></small>
+    </div>
+
+    <div class="field">
+        <label for="mov-poster">Póster</label><br>
+        <input pInputText type="text" formControlName="poster" maxlength="100" id="mov-poster" />
+
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['poster'] && forma.controls['poster'].errors?.['pattern'] && !forma.controls['poster'].errors?.['required']" id="mov-alert-poster-format">El póster está con formato inválido.<br> Solo se permiten letras (a-z, A-Z), números (0-9), et (&), interrogante (?), almohadilla (#), dolar ($), punto (.), coma(,) guión medio (-) y guión bajo (_). Máximo 100 caracteres.<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['poster'] && forma.controls['poster'].errors?.['maxtext'] && !forma.controls['poster'].errors?.['required']" id="mov-alert-poster-max">El póster supera los caracteres máximos permitidos (100)<br></small>
+    </div>
+
+    <div class="p-field">
+        <label for="genres">Géneros</label><br>
+        <p-multiSelect [options]="genres" [(ngModel)]="selectedGenres" [ngModelOptions]="{standalone: true}" optionLabel="name" selectedItemsLabel="{0} géneros seleccionados"></p-multiSelect>
+    </div>
+
+    <div class="p-field">
+        <label for="actorsInterface">Actores</label><br>
+        <p-multiSelect [options]="actorsInterface" [(ngModel)]="selectedActors" [ngModelOptions]="{standalone: true}" optionLabel="name" [maxSelectedLabels]="2" selectedItemsLabel="{0} actores seleccionados"></p-multiSelect>
+    </div>
+
+    <div class="p-field w3-margin-top">
+        <label for="mov-year">Año</label><br>
+        <p-inputNumber formControlName="year" inputId="year" mode="decimal" [size]="3" [min]="1900" [max]="2099" [maxlength]="4" id="mov-year"></p-inputNumber>
+
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['year'].touched && forma.controls['year'].errors?.['required']" id="mov-year-req">El año es requerido<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['year'] && forma.controls['year'].errors?.['pattern'] && !forma.controls['year'].errors?.['required']" id="mov-year-format">El año está con formato inválido.<br> Solo se números del 1900 al 2099<br></small>
+    </div>
+
+    <div class="p-field w3-margin-top">
+        <label for="mov-duration">Duración</label><br>
+        <p-inputNumber formControlName="duration" inputId="duration" mode="decimal" [size]="3" [min]="0" [max]="999" [maxlength]="3" id="mov-duration"></p-inputNumber>
+
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['duration'].touched && forma.controls['duration'].errors?.['required']" id="mov-duration-req">La duración es requerida<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['duration'] && forma.controls['duration'].errors?.['pattern'] && !forma.controls['duration'].errors?.['required']" id="mov-duration-format">La duración está con formato inválido.<br> Solo se números decimales del 0 al 999<br></small>
+    </div>
+
+    <div class="p-field w3-margin-top">
+        <label for="mov-imdbRating">Puntuación</label><br>
+        <p-inputNumber formControlName="imdbRating" inputId="imdbRating" mode="decimal" [size]="3" [min]="0" [max]="10" [minFractionDigits]="2" [maxFractionDigits]="2" id="mov-imdbRating"></p-inputNumber>
+
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['imdbRating'].touched && forma.controls['imdbRating'].errors?.['required']" id="mov-imdbRating-req">La puntuación es requerida<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['imdbRating'] && forma.controls['imdbRating'].errors?.['pattern'] && !forma.controls['imdbRating'].errors?.['required']" id="mov-imdbRating-format">La puntuación está con formato inválido.<br> Solo se números decimales del 0 al 10<br></small>
+    </div>
+
+    <div class="w3-center w3-margin-top">
+        <button pButton pRipple type="submit" label="Guardar" [style]="{'width': '85px'}" class="w3-margin-right w3-margin-bottom" [disabled]="!forma.valid" id="mov-submit"></button>
+        <button pButton pRipple type="button" label="Eliminar" [style]="{'width': '85px'}" class="p-button-danger w3-margin-right w3-margin-bottom" (click)="deleteMovieConfirm($event)" id="mov-delete" *ngIf="movie && movie.id"></button>
+        <button pButton pRipple type="button" label="Cancelar" [style]="{'width': '85px'}" class="p-button-warning w3-margin-right w3-margin-bottom" (click)="cancel()" id="mov-cancel"></button>
+    </div>
+</form>
+
+
+<!-- Ventana de Confirmación -->
+<p-confirmPopup></p-confirmPopup>
