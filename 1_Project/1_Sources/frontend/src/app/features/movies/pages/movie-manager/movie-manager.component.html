@@ -23,12 +23,12 @@
 
     <div class="p-field">
         <label for="genres">Géneros</label><br>
-        <p-multiSelect [options]="genres" [(ngModel)]="selectedGenres" [ngModelOptions]="{standalone: true}" optionLabel="name" selectedItemsLabel="{0} géneros seleccionados"></p-multiSelect>
+        <p-multiSelect [options]="genres" [(ngModel)]="selectedGenres" [ngModelOptions]="{standalone: true}" optionLabel="name" selectedItemsLabel="{0} géneros seleccionados" id="mov-genres"></p-multiSelect>
     </div>
 
     <div class="p-field">
         <label for="actorsInterface">Actores</label><br>
-        <p-multiSelect [options]="actorsInterface" [(ngModel)]="selectedActors" [ngModelOptions]="{standalone: true}" optionLabel="name" [maxSelectedLabels]="2" selectedItemsLabel="{0} actores seleccionados"></p-multiSelect>
+        <p-multiSelect [options]="actorsInterface" [(ngModel)]="selectedActors" [ngModelOptions]="{standalone: true}" optionLabel="name" [maxSelectedLabels]="2" selectedItemsLabel="{0} actores seleccionados" id="mov-actors"></p-multiSelect>
     </div>
 
     <div class="p-field w3-margin-top">
@@ -56,9 +56,9 @@
     </div>
 
     <div class="w3-center w3-margin-top">
-        <button pButton pRipple type="submit" label="Guardar" [style]="{'width': '85px'}" class="w3-margin-right w3-margin-bottom" [disabled]="!forma.valid || running" id="mov-submit"></button>
-        <button pButton pRipple type="button" label="Eliminar" [style]="{'width': '85px'}" class="p-button-danger w3-margin-right w3-margin-bottom" (click)="deleteMovieConfirm($event)" [disabled]="running" id="mov-delete" *ngIf="movie && movie.id"></button>
-        <button pButton pRipple type="button" label="Cancelar" [style]="{'width': '85px'}" class="p-button-warning w3-margin-right w3-margin-bottom" (click)="cancel()" [disabled]="running" id="mov-cancel"></button>
+        <button pButton pRipple type="submit" label="Guardar" [style]="{'width': '85px'}" class="w3-margin-right w3-margin-bottom" [disabled]="!forma.valid || running" id="mov-btn-submit"></button>
+        <button pButton pRipple type="button" label="Eliminar" [style]="{'width': '85px'}" class="p-button-danger w3-margin-right w3-margin-bottom" (click)="deleteMovieConfirm($event)" [disabled]="running" id="mov-btn-delete" *ngIf="movie && movie.id"></button>
+        <button pButton pRipple type="button" label="Cancelar" [style]="{'width': '85px'}" class="p-button-warning w3-margin-right w3-margin-bottom" (click)="cancel()" [disabled]="running" id="mov-btn-cancel"></button>
     </div>
 </form>
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 // Servicios
 import { MoviesService, ActorsService } from '../../../service.index';
 import { TitleShareService } from '../../../../shared/title/services/title.service';
+import { MessageService } from 'primeng/api';
 
 // Modelos
 import { MovieModel } from '../../models/movie.model';
@@ -27,7 +28,8 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     private moviesService: MoviesService,
     private actorsService: ActorsService,
     private titleShareService: TitleShareService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService 
   ) {
     this.title = 'Películas';
     this.loadingMovies = true;
@@ -62,6 +64,11 @@ export class MoviesListComponent implements OnInit, OnDestroy {
       this.moviesObj = response;
 
       this.loadingMovies = false;
+    }, (error: any) => {
+      const message = 'Se ha producido un error en la consulta de las películas';
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
+
+      this.loadingMovies = false;
     });
 
     this.observables.push(ob);
@@ -71,6 +78,11 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     this.loadingActors = true;
     const ob = this.actorsService.getAll().subscribe((response: any) => {
       this.actorsObj = response;
+
+      this.loadingActors = false;
+    }, (error: any) => {
+      const message = 'Se ha producido un error en la consulta de los actores';
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
 
       this.loadingActors = false;
     });

@@ -140,7 +140,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
 
       this.cancel();
     }, (error: any) => {
-      const message = 'Se ha producido un error en el alta del disositivo';
+      const message = 'Se ha producido un error en el alta de la película';
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
 
       this.running = false;
@@ -157,7 +157,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
       this.running = false;
       this.cancel();
     }, (error: any) => {      
-      const message = 'Se ha producido un error en la edición del disositivo';
+      const message = 'Se ha producido un error en la edición de la película';
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
 
       this.running = false;
@@ -191,7 +191,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
       this.running = false;
       this.cancel();
     }, (error: any) => {      
-      const message = 'Se ha producido un error en la eliminación del disositivo';
+      const message = 'Se ha producido un error en la eliminación de la película';
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
 
       this.running = false;

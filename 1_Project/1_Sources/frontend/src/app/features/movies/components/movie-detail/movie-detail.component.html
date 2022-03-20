@@ -1,30 +1,30 @@
 <p-card *ngIf="movie">
     <div class="w3-right">
-        <span id="app-icon-manager" class="app-pointer" (click)="managerMovie()"><i class="pi pi-cog" style="font-size: 2rem" title="Gestionar película"></i></span>
+        <span id="mov-icon-manager" class="app-pointer" (click)="managerMovie()"><i class="pi pi-cog" style="font-size: 2rem" title="Gestionar película"></i></span>
     </div>
 
     <!-- <div>{{movie.id}}</div> -->
-    <h4 style="text-shadow:1px 1px 0 #444">{{movie.title}}</h4>
-    <div class="w3-center" *ngIf="movie.poster">
+    <h4 style="text-shadow:1px 1px 0 #444" id="mov-title">{{movie.title}}</h4>
+    <div class="w3-center" *ngIf="movie.poster" id="mov-poster">
         <img src="{{movie.poster}}" class="w3-round" alt="{{movie.title}}" style="max-width: 80%; height: auto;">
     </div>
 
     <div>
-        <span *ngIf="movie.year">
+        <span *ngIf="movie.year" id="mov-year">
             <div class="w3-tag w3-round w3-pale-red w3-margin-right w3-margin-top" style="padding:3px">
                 <div class="w3-tag w3-round w3-pale-red w3-border w3-border-white">
                     Año: {{movie.year}}
                 </div>
             </div>
         </span>
-        <span *ngIf="movie.duration">
+        <span *ngIf="movie.duration" id="mov-duration">
             <div class="w3-tag w3-round w3-pale-red w3-margin-right w3-margin-top" style="padding:3px">
                 <div class="w3-tag w3-round w3-pale-red w3-border w3-border-white">
                     {{movie.duration}} m.
                 </div>
             </div>
         </span>
-        <span *ngIf="movie.imdbRating">
+        <span *ngIf="movie.imdbRating" id="mov-imdbRating">
             <div class="w3-tag w3-round w3-pale-red w3-margin-right w3-margin-top" style="padding:3px">
                 <div class="w3-tag w3-round w3-pale-red w3-border w3-border-white">
                     Punt.: {{movie.imdbRating}}
@@ -33,7 +33,7 @@
         </span>
     </div>
 
-    <div>
+    <div id="mov-genre">
         <span *ngFor="let genreItem of movie.genre">
             <div class="w3-tag w3-round w3-lime w3-margin-right w3-margin-top" style="padding:3px">
                 <div class="w3-tag w3-round w3-lime w3-border w3-border-white">
@@ -43,7 +43,7 @@
         </span>
     </div>
 
-    <div>
+    <div id="mov-actors">
         <span *ngFor="let actorItem of actorsMovie">
             <div class="w3-tag w3-round w3-light-blue w3-margin-right w3-margin-top" style="padding:3px">
                 <div class="w3-tag w3-round w3-light-blue w3-border w3-border-white">
