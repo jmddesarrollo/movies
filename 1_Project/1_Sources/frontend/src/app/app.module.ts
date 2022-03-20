@@ -6,13 +6,15 @@ import { CommonModule } from "@angular/common";
 // Servicios
 import { ServiceModule } from './features/service.module';
 
+//
+import {ToastModule} from 'primeng/toast';
+
 // Modulos
 import { FeaturesModule } from './features/features.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     SharedModule,
     FeaturesModule,
-    ServiceModule
+    ServiceModule,
+    ToastModule
   ],
   exports: [
     BrowserAnimationsModule,

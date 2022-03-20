@@ -20,6 +20,8 @@ import { ActorModel } from '../../../actors/models/actor.model';
 })
 export class MovieManagerComponent implements OnInit, OnDestroy {
   public loading: boolean;
+  public running: boolean;
+
   public movieId: number;
   public movie: MovieModel;
   public genres: Genre[];
@@ -44,6 +46,8 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
     private messageService: MessageService    
   ) { 
     this.loading = true;
+    this.running = false;
+
     this.movieId = 0;
     this.genres = [
       {name: 'Action'},
@@ -71,7 +75,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
 
     this.forma = new FormGroup({
       'id': new FormControl(0),
-      'title': new FormControl('', [Validators.required, Validators.pattern('^([A-Za-zñÑÁÉÍÓÚÄËÏÖÜáéíóúäëïöüÇç&\'\,\’\?\¿\/().:_-]+[\\s]*){1,100}$')]),
+      'title': new FormControl('', [Validators.required, Validators.pattern('^([0-9A-Za-zñÑÁÉÍÓÚÄËÏÖÜáéíóúäëïöüÇç&\'\,\’\?\¿\/().:_-]+[\\s]*){1,100}$')]),
       'poster': new FormControl('', [Validators.pattern('^[0-9a-zA-Z]([-./:\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\’\/\\\+&amp;%\$#_]*){1,100}$')]),
       'genre': new FormControl([]),
       'year': new FormControl(1950, [Validators.required, Validators.pattern('^(19[0-9][0-9]|20[0-9][0-9])$')]),
@@ -125,22 +129,38 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
     }
   }
   addMovie() {
+    this.running = true;
+
     this.moviesService.add(this.movie).subscribe((response: MovieModel) => {
+      console.log('add Movie');
       const message = 'Alta de la película realizada correctamente';
-      this.messageService.add({ severity: 'success', summary: 'Alta', detail: message, life: 2000 });
+      this.messageService.add({ severity: 'success', summary: 'Alta', detail: message, life: 3000 });
+
+      this.running = false;
+
+      this.cancel();
     }, (error: any) => {
       const message = 'Se ha producido un error en el alta del disositivo';
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
+
+      this.running = false;
     }); 
   }
 
   editMovie() {
+    this.running = true;
+
     this.moviesService.edit(this.movie).subscribe((response: MovieModel) => {
       const message = 'Edición de la película realizada correctamente';
-      this.messageService.add({ severity: 'success', summary: 'Edición', detail: message, life: 2000 });
-    }, (error: any) => {
+      this.messageService.add({ severity: 'success', summary: 'Edición', detail: message, life: 3000 });
+
+      this.running = false;
+      this.cancel();
+    }, (error: any) => {      
       const message = 'Se ha producido un error en la edición del disositivo';
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
+
+      this.running = false;
     });
   }
 
@@ -161,13 +181,20 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
   }
 
   deleteMovie() {
+    this.running = true;
+
     this.moviesService.delete(this.movie.id).subscribe(() => {
       const message = 'Eliminación de la película realizada correctamente';
 
-      this.messageService.add({ severity: 'success', summary: 'Eliminación', detail: message, life: 2000 });
-    }, (error: any) => {
+      this.messageService.add({ severity: 'success', summary: 'Eliminación', detail: message, life: 3000 });
+
+      this.running = false;
+      this.cancel();
+    }, (error: any) => {      
       const message = 'Se ha producido un error en la eliminación del disositivo';
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
+
+      this.running = false;
     });      
   }
 
@@ -178,7 +205,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
       this.setGenresSelected();        
 
       this.forma.setValue(this.movie);
-      this.titleShareService.changeTitle(this.movie.title);
+      this.titleShareService.changeTitle(this.movie.title + " (" + this.movie.year + ")");
 
       this.loading = false;
     }, (error: any) => {

@@ -9,7 +9,7 @@
         <input pInputText type="text" formControlName="title" autofocus maxlength="100" id="mov-title" />
 
         <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'].touched && forma.controls['title'].errors?.['required']" id="mov-title-req">El título es requerido<br></small>
-        <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'] && forma.controls['title'].errors?.['pattern'] && !forma.controls['title'].errors?.['required']" id="mov-title-alert-title-format">El título está con formato inválido.<br> Solo se permiten letras (a-z, A-Z), cedilla (ç, Ç), et (&), apóstrofe ('), punto (.), coma (,), dos puntos (:), guión medio (-), guión bajo (_), interrogantes (¿?), paréntesis (()), barra invertida (/), vocales acentuadas y con diéresis (áéíóúäëïöü).<br>Máximo 100 caracteres.<br></small>
+        <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'] && forma.controls['title'].errors?.['pattern'] && !forma.controls['title'].errors?.['required']" id="mov-title-alert-title-format">El título está con formato inválido.<br> Solo se permiten letras (a-z, A-Z), números (0-9), cedilla (ç, Ç), et (&), apóstrofe ('), punto (.), coma (,), dos puntos (:), guión medio (-), guión bajo (_), interrogantes (¿?), paréntesis (()), barra invertida (/), vocales acentuadas y con diéresis (áéíóúäëïöü).<br>Máximo 100 caracteres.<br></small>
         <small class="p-error block" *ngIf="!forma.valid && forma.controls['title'] && forma.controls['title'].errors?.['maxtext'] && !forma.controls['title'].errors?.['required']" id="mov-title-alert-max">El título supera los caracteres máximos permitidos (100)<br></small>
     </div>
 
@@ -56,9 +56,9 @@
     </div>
 
     <div class="w3-center w3-margin-top">
-        <button pButton pRipple type="submit" label="Guardar" [style]="{'width': '85px'}" class="w3-margin-right w3-margin-bottom" [disabled]="!forma.valid" id="mov-submit"></button>
-        <button pButton pRipple type="button" label="Eliminar" [style]="{'width': '85px'}" class="p-button-danger w3-margin-right w3-margin-bottom" (click)="deleteMovieConfirm($event)" id="mov-delete" *ngIf="movie && movie.id"></button>
-        <button pButton pRipple type="button" label="Cancelar" [style]="{'width': '85px'}" class="p-button-warning w3-margin-right w3-margin-bottom" (click)="cancel()" id="mov-cancel"></button>
+        <button pButton pRipple type="submit" label="Guardar" [style]="{'width': '85px'}" class="w3-margin-right w3-margin-bottom" [disabled]="!forma.valid || running" id="mov-submit"></button>
+        <button pButton pRipple type="button" label="Eliminar" [style]="{'width': '85px'}" class="p-button-danger w3-margin-right w3-margin-bottom" (click)="deleteMovieConfirm($event)" [disabled]="running" id="mov-delete" *ngIf="movie && movie.id"></button>
+        <button pButton pRipple type="button" label="Cancelar" [style]="{'width': '85px'}" class="p-button-warning w3-margin-right w3-margin-bottom" (click)="cancel()" [disabled]="running" id="mov-cancel"></button>
     </div>
 </form>
 
