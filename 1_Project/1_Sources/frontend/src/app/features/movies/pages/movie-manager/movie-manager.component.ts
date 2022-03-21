@@ -99,9 +99,8 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.titleShareService.changeTitle('Nueva película');
       }
-    }); 
+    });
     
-    this.getAllActors();
   }
 
   ngOnDestroy() {
@@ -131,7 +130,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
   addMovie() {
     this.running = true;
 
-    this.moviesService.add(this.movie).subscribe((response: MovieModel) => {
+    const ob = this.moviesService.add(this.movie).subscribe((response: MovieModel) => {
       const message = 'Alta de la película realizada correctamente';
       this.messageService.add({ severity: 'success', summary: 'Alta', detail: message, life: 3000 });
 
@@ -144,12 +143,14 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
 
       this.running = false;
     }); 
+
+    this.observables.push(ob);
   }
 
   editMovie() {
     this.running = true;
 
-    this.moviesService.edit(this.movie).subscribe((response: MovieModel) => {
+    const ob = this.moviesService.edit(this.movie).subscribe((response: MovieModel) => {
       const message = 'Edición de la película realizada correctamente';
       this.messageService.add({ severity: 'success', summary: 'Edición', detail: message, life: 3000 });
 
@@ -161,6 +162,8 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
 
       this.running = false;
     });
+
+    this.observables.push(ob);
   }
 
   deleteMovieConfirm(event: Event) {
@@ -182,7 +185,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
   deleteMovie() {
     this.running = true;
 
-    this.moviesService.delete(this.movie.id).subscribe(() => {
+    const ob = this.moviesService.delete(this.movie.id).subscribe(() => {
       const message = 'Eliminación de la película realizada correctamente';
 
       this.messageService.add({ severity: 'success', summary: 'Eliminación', detail: message, life: 3000 });
@@ -194,7 +197,9 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000});
 
       this.running = false;
-    });      
+    });
+    
+    this.observables.push(ob);
   }
 
   getMovie() {
@@ -205,6 +210,10 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
 
       this.forma.setValue(this.movie);
       this.titleShareService.changeTitle(this.movie.title + " (" + this.movie.year + ")");
+
+      // Necesario solicitar tras recoger datos de la película, porque si se solicita petición en ngOnInit
+      // y llega antes que la película, no carga los actores en el formulario
+      this.getAllActors();
 
       this.loading = false;
     }, (error: any) => {
@@ -225,6 +234,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
   }
   
   setActorsInterface() {
+    this.actorsInterface = [];
     for (let actor of this.actors) {
       const actorInterface: ActorsInterface = {
         id: actor.id,
@@ -259,6 +269,7 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
         this.selectedActors.push(actorInterface);
       }
     }
+
     this.selectedActors = [...this.selectedActors];    
   }
 

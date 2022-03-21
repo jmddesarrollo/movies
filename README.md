@@ -16,7 +16,7 @@ libertad para crear el diseño.
 
 ### Base
 
-Nuevo listado de códigos de licencia sin impresión de tríptico 
+Consulta de datos asociados a las películas 
 
 ### Nuevas funcionalidades
 
