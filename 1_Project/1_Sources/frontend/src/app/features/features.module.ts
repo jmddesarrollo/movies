@@ -6,8 +6,11 @@ import { FormsModule} from '@angular/forms';
 // DataFormulario: Necesario para formularios por validación tipo Data.
 import { ReactiveFormsModule} from '@angular/forms';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 // Servicios PrimeNg
 import { ConfirmationService, MessageService } from 'primeng/api';
+
 // Modulos PrimeNg
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -37,7 +40,8 @@ import { MovieManagerComponent } from './movies/pages/movie-manager/movie-manage
     InputNumberModule,
     InputTextModule,
     MultiSelectModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    TranslateModule
   ],
   declarations: [
     MoviesListComponent,

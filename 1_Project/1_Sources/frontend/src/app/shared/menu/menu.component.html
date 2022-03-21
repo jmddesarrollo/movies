@@ -1,4 +1,4 @@
 <div>
     <p-menu #menu [popup]="true" [model]="items" id="app-menu" appendTo="body"></p-menu>
-    <button type="button" pButton icon="pi pi-bars" label="Menú" (click)="menu.toggle($event)" id="app-menu-btn"></button>
+    <button type="button" pButton icon="pi pi-bars" label="{{'Menú' | translate}}" (click)="menu.toggle($event)" id="app-menu-btn "></button>
 </div>

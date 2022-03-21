@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// Traducción importada desde app.module
+import { TranslateModule } from '@ngx-translate/core';
+
 // Servicios
 import { TitleShareService } from './title/services/title.service';
 
@@ -20,7 +23,8 @@ import { RippleModule } from 'primeng/ripple';
     RouterModule,
     ButtonModule,     
     MenuModule,
-    RippleModule
+    RippleModule,
+    TranslateModule
   ],
   declarations: [
     MenuComponent,

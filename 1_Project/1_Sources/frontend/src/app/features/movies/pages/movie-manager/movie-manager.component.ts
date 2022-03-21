@@ -132,7 +132,6 @@ export class MovieManagerComponent implements OnInit, OnDestroy {
     this.running = true;
 
     this.moviesService.add(this.movie).subscribe((response: MovieModel) => {
-      console.log('add Movie');
       const message = 'Alta de la película realizada correctamente';
       this.messageService.add({ severity: 'success', summary: 'Alta', detail: message, life: 3000 });
 
